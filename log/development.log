@@ -1,0 +1,602 @@
+  [1m[35m (227.6ms)[0m  [1m[35mCREATE DATABASE "jwt_bimar_dev" ENCODING = 'utf8'[0m
+  [1m[35m (213.5ms)[0m  [1m[35mCREATE DATABASE "jwt_bimar_test" ENCODING = 'utf8'[0m
+  [1m[35m (35.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (32.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_try_advisory_lock(253007159185912845)[0m
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.9ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2023-08-17 10:13:00.177856"], ["updated_at", "2023-08-17 10:13:00.177856"]]
+  [1m[35m (8.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(253007159185912845)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(253007159185912845)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20230817101925)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (32.0ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "name" character varying, "username" character varying, "email" character varying, "password_digest" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.8ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20230817101925"]]
+  [1m[35m (6.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(253007159185912845)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: Using `bin/rake routes` is deprecated and will be removed in Rails 6.1. Use `bin/rails routes` instead.
+ (called from load at /usr/share/rvm/gems/ruby-2.5.8/bin/rake:25)
+Started POST "//users" for ::1 at 2023-08-17 15:57:30 +0530
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+NameError (uninitialized constant #<Class:0x000055e5da9e6bd0>::AvatarUploader):
+  
+app/models/user.rb:3:in `<class:User>'
+app/models/user.rb:1:in `<top (required)>'
+Started POST "//users" for ::1 at 2023-08-17 15:58:07 +0530
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"ruchi", "user_name"=>"@ruchi", "email"=>"ruchi@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"ruchi", "email"=>"ruchi@gmail.com"}}
+[31mUnpermitted parameters: :user_name, :user[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ruchi@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:19:in `create'
+Completed 422 Unprocessable Entity in 310ms (Views: 0.3ms | ActiveRecord: 7.4ms | Allocations: 13881)
+
+
+Started POST "//users" for ::1 at 2023-08-17 15:58:28 +0530
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"ruchi", "user_name"=>"@ruchii", "email"=>"ruchi@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"ruchi", "email"=>"ruchi@gmail.com"}}
+[31mUnpermitted parameters: :user_name, :user[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ruchi@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:19:in `create'
+Completed 422 Unprocessable Entity in 294ms (Views: 0.2ms | ActiveRecord: 1.4ms | Allocations: 4586)
+
+
+Started POST "//users" for ::1 at 2023-08-17 15:58:48 +0530
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"ruchi", "user_name"=>"@ruchii", "email"=>"ruchi@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"ruchi", "email"=>"ruchi@gmail.com"}}
+[31mUnpermitted parameters: :user_name, :user[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ruchi@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "ruchi"], ["email", "ruchi@gmail.com"], ["password_digest", "$2a$12$AvzZzzk3Fri7A1sgMyrFA.xz4vgImFf4.cFnx28Ku4clm3Ugt2tPK"], ["created_at", "2023-08-17 10:28:48.680439"], ["updated_at", "2023-08-17 10:28:48.680439"]]
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[35m (21.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:19:in `create'
+Completed 201 Created in 327ms (Views: 1.0ms | ActiveRecord: 27.7ms | Allocations: 9015)
+
+
+Started POST "/auth/login" for ::1 at 2023-08-17 16:01:40 +0530
+Processing by AuthenticationController#login as */*
+  Parameters: {"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ruchi@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:6:in `login'
+Completed 500 Internal Server Error in 251ms (ActiveRecord: 2.9ms | Allocations: 2508)
+
+
+  
+NameError (uninitialized constant AuthenticationController::JsonWebToken):
+  
+app/controllers/authentication_controller.rb:8:in `login'
+Started POST "/auth/login" for ::1 at 2023-08-17 16:03:20 +0530
+Processing by AuthenticationController#login as */*
+  Parameters: {"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ruchi@gmail.com"], ["LIMIT", 1]]
+  ↳ (byebug):1:in `login'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ruchi@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:7:in `login'
+Completed 500 Internal Server Error in 297693ms (ActiveRecord: 9.5ms | Allocations: 80156)
+
+
+  
+NameError (uninitialized constant AuthenticationController::JsonWebToken):
+  
+app/controllers/authentication_controller.rb:9:in `login'
+Started POST "/auth/login" for ::1 at 2023-08-17 16:10:24 +0530
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AuthenticationController#login as */*
+  Parameters: {"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ruchi@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:7:in `login'
+Completed 500 Internal Server Error in 19111ms (ActiveRecord: 13.9ms | Allocations: 61493)
+
+
+  
+NameError (uninitialized constant AuthenticationController::JsonWebToken):
+  
+app/controllers/authentication_controller.rb:9:in `login'
+Started POST "/auth/login" for ::1 at 2023-08-17 16:11:24 +0530
+Processing by AuthenticationController#login as */*
+  Parameters: {"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ruchi@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:7:in `login'
+Completed 500 Internal Server Error in 4412ms (ActiveRecord: 10.1ms | Allocations: 79507)
+
+
+  
+NameError (undefined local variable or method `token' for #<AuthenticationController:0x00007fe9c47dd100>):
+  
+app/controllers/authentication_controller.rb:11:in `login'
+Started POST "/auth/login" for ::1 at 2023-08-17 16:11:46 +0530
+Processing by AuthenticationController#login as */*
+  Parameters: {"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ruchi@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:7:in `login'
+Completed 200 OK in 2765ms (Views: 0.2ms | ActiveRecord: 12.1ms | Allocations: 8921)
+
+
+Started POST "/auth/login" for ::1 at 2023-08-17 16:12:15 +0530
+Processing by AuthenticationController#login as */*
+  Parameters: {"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ruchi@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:7:in `login'
+Completed 500 Internal Server Error in 4590ms (ActiveRecord: 10.7ms | Allocations: 10305)
+
+
+  
+NameError (uninitialized constant AuthenticationController::JsonWebToken):
+  
+app/controllers/authentication_controller.rb:9:in `login'
+Started POST "/auth/login" for ::1 at 2023-08-17 16:15:24 +0530
+Processing by AuthenticationController#login as */*
+  Parameters: {"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ruchi@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:7:in `login'
+Completed 500 Internal Server Error in 3266ms (ActiveRecord: 10.5ms | Allocations: 9392)
+
+
+  
+NoMethodError (undefined method `encode' for BuilderJsonWebToken:Module):
+  
+app/controllers/authentication_controller.rb:9:in `login'
+Started POST "/auth/login" for ::1 at 2023-08-17 16:15:59 +0530
+Processing by AuthenticationController#login as */*
+  Parameters: {"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ruchi@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:7:in `login'
+Completed 500 Internal Server Error in 4837ms (ActiveRecord: 15.2ms | Allocations: 9433)
+
+
+  
+NoMethodError (undefined method `encode' for BuilderJsonWebToken:Module):
+  
+app/controllers/authentication_controller.rb:9:in `login'
+Started POST "/auth/login" for ::1 at 2023-08-17 16:18:34 +0530
+Processing by AuthenticationController#login as */*
+  Parameters: {"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ruchi@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:7:in `login'
+Completed 500 Internal Server Error in 4572ms (ActiveRecord: 11.1ms | Allocations: 9424)
+
+
+  
+NoMethodError (undefined method `encode' for BuilderJsonWebToken:Module):
+  
+app/controllers/authentication_controller.rb:9:in `login'
+Started POST "/auth/login" for ::1 at 2023-08-17 16:19:38 +0530
+Processing by AuthenticationController#login as */*
+  Parameters: {"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ruchi@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:7:in `login'
+Completed 500 Internal Server Error in 4027ms (ActiveRecord: 12.8ms | Allocations: 10251)
+
+
+  
+NameError (uninitialized constant AuthenticationController::JsonWebToken):
+  
+app/controllers/authentication_controller.rb:9:in `login'
+Started POST "/auth/login" for ::1 at 2023-08-17 16:22:31 +0530
+Processing by AuthenticationController#login as */*
+  Parameters: {"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ruchi@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:7:in `login'
+Completed 500 Internal Server Error in 2970ms (ActiveRecord: 1.1ms | Allocations: 4029)
+
+
+  
+NameError (uninitialized constant AuthenticationController::JsonWebToken):
+  
+app/controllers/authentication_controller.rb:9:in `login'
+Started POST "/auth/login" for ::1 at 2023-08-17 16:25:03 +0530
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AuthenticationController#login as */*
+  Parameters: {"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ruchi@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:7:in `login'
+Completed 500 Internal Server Error in 3387ms (ActiveRecord: 15.5ms | Allocations: 63164)
+
+
+  
+NameError (uninitialized constant AuthenticationController::JsonWebToken):
+  
+app/controllers/authentication_controller.rb:9:in `login'
+Started POST "/auth/login" for ::1 at 2023-08-17 16:35:35 +0530
+Processing by AuthenticationController#login as */*
+  Parameters: {"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ruchi@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "ruchi@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:7:in `login'
+Completed 200 OK in 3947ms (Views: 0.2ms | ActiveRecord: 2.0ms | Allocations: 9143)
+
+
+Started GET "/users" for ::1 at 2023-08-17 16:37:48 +0530
+Processing by UsersController#index as */*
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 0ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 203)
+
+
+Started GET "/users" for ::1 at 2023-08-17 16:38:20 +0530
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8:in `index'
+Completed 200 OK in 11ms (Views: 4.0ms | ActiveRecord: 1.2ms | Allocations: 1919)
+
+
+Started GET "/users/null" for ::1 at 2023-08-17 16:40:45 +0530
+Processing by UsersController#show as */*
+  Parameters: {"_username"=>"null"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "null"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:43:in `find_user'
+Filter chain halted as :find_user rendered or redirected
+Completed 404 Not Found in 4ms (Views: 0.2ms | ActiveRecord: 0.6ms | Allocations: 1656)
+
+
+Started GET "/users/1" for ::1 at 2023-08-17 16:40:56 +0530
+Processing by UsersController#show as */*
+  Parameters: {"_username"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "1"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:43:in `find_user'
+Filter chain halted as :find_user rendered or redirected
+Completed 404 Not Found in 4ms (Views: 0.2ms | ActiveRecord: 0.7ms | Allocations: 1461)
+
+
+Started GET "/users/ruchi" for ::1 at 2023-08-17 16:41:32 +0530
+Processing by UsersController#show as */*
+  Parameters: {"_username"=>"ruchi"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "ruchi"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:43:in `find_user'
+Filter chain halted as :find_user rendered or redirected
+Completed 404 Not Found in 6ms (Views: 0.2ms | ActiveRecord: 1.4ms | Allocations: 1474)
+
+
+Started GET "/users" for ::1 at 2023-08-17 16:41:43 +0530
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8:in `index'
+Completed 200 OK in 7ms (Views: 3.2ms | ActiveRecord: 1.5ms | Allocations: 1748)
+
+
+DEPRECATION WARNING: Using `bin/rake routes` is deprecated and will be removed in Rails 6.1. Use `bin/rails routes` instead.
+ (called from load at /usr/share/rvm/gems/ruby-2.5.8/bin/rake:25)
+Started GET "/users/1" for ::1 at 2023-08-17 16:43:21 +0530
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:43:in `find_user'
+Completed 200 OK in 19ms (Views: 0.4ms | ActiveRecord: 5.5ms | Allocations: 9528)
+
+
+Started POST "//users" for ::1 at 2023-08-17 16:43:53 +0530
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"rashmika", "user_name"=>"@rushmika", "email"=>"rashmikagmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"rashmika", "email"=>"rashmikagmail.com"}}
+[31mUnpermitted parameters: :user_name, :user[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "rashmikagmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:19:in `create'
+Completed 422 Unprocessable Entity in 255ms (Views: 0.2ms | ActiveRecord: 1.0ms | Allocations: 5293)
+
+
+Started POST "//users" for ::1 at 2023-08-17 16:44:01 +0530
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"rashmika", "user_name"=>"@rushmika", "email"=>"rashmika@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"rashmika", "email"=>"rashmika@gmail.com"}}
+[31mUnpermitted parameters: :user_name, :user[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "rashmika@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "rashmika"], ["email", "rashmika@gmail.com"], ["password_digest", "$2a$12$p5MqCTGtL969ivIceYZDAuJr30.LkACqcnpnxED9EySeUBSXSZomq"], ["created_at", "2023-08-17 11:14:01.680731"], ["updated_at", "2023-08-17 11:14:01.680731"]]
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[35m (7.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:19:in `create'
+Completed 201 Created in 265ms (Views: 0.5ms | ActiveRecord: 8.8ms | Allocations: 4146)
+
+
+Started POST "/auth/login" for ::1 at 2023-08-17 16:44:29 +0530
+Processing by AuthenticationController#login as */*
+  Parameters: {"email"=>"@rushmika", "password"=>"[FILTERED]", "authentication"=>{"email"=>"@rushmika", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "@rushmika"], ["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:7:in `login'
+Completed 401 Unauthorized in 12406ms (Views: 0.7ms | ActiveRecord: 1.3ms | Allocations: 54366)
+
+
+Started POST "/auth/login" for ::1 at 2023-08-17 16:45:05 +0530
+Processing by AuthenticationController#login as */*
+  Parameters: {"email"=>"rashmika@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"rashmika@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "rashmika@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:7:in `login'
+Completed 200 OK in 2796ms (Views: 0.1ms | ActiveRecord: 1.3ms | Allocations: 2705)
+
+
+Started GET "/users" for ::1 at 2023-08-17 16:45:29 +0530
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8:in `index'
+Completed 200 OK in 4ms (Views: 1.8ms | ActiveRecord: 0.8ms | Allocations: 1902)
+
+
+Started GET "/users/2" for ::1 at 2023-08-17 16:45:47 +0530
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:43:in `find_user'
+Completed 200 OK in 4ms (Views: 0.3ms | ActiveRecord: 0.8ms | Allocations: 1736)
+
+
+Started GET "/users/2" for ::1 at 2023-08-17 16:46:14 +0530
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:43:in `find_user'
+Completed 200 OK in 4ms (Views: 0.3ms | ActiveRecord: 0.7ms | Allocations: 1736)
+
+
+Started GET "/users/2" for ::1 at 2023-08-17 16:47:03 +0530
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:44:in `find_user'
+Completed 200 OK in 203904ms (Views: 1.5ms | ActiveRecord: 4.3ms | Allocations: 10681)
+
+
+Started DELETE "/users/1" for ::1 at 2023-08-17 16:50:36 +0530
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#destroy as */*
+  Parameters: {"id"=>"1"}
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 383)
+
+
+Started DELETE "/users/1" for ::1 at 2023-08-17 16:51:09 +0530
+Processing by UsersController#destroy as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:43:in `find_user'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:37:in `destroy'
+  [1m[36mUser Destroy (0.5ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 1]]
+  ↳ app/controllers/users_controller.rb:37:in `destroy'
+  [1m[35m (8.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:37:in `destroy'
+Completed 204 No Content in 44ms (ActiveRecord: 14.0ms | Allocations: 14122)
+
+
+Started DELETE "/users/1" for ::1 at 2023-08-17 16:51:54 +0530
+Processing by UsersController#destroy as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:44:in `find_user'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:37:in `destroy'
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 2]]
+  ↳ app/controllers/users_controller.rb:37:in `destroy'
+  [1m[35m (7.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:37:in `destroy'
+Completed 200 OK in 35ms (Views: 0.2ms | ActiveRecord: 12.2ms | Allocations: 10064)
+
+
+Started DELETE "/users/2" for ::1 at 2023-08-17 16:52:01 +0530
+Processing by UsersController#destroy as */*
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.5ms | Allocations: 834)
+
+
+Started GET "/users" for ::1 at 2023-08-17 16:52:12 +0530
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 4ms (Views: 0.2ms | ActiveRecord: 0.6ms | Allocations: 820)
+
+
+Started GET "/users" for ::1 at 2023-08-17 16:52:24 +0530
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 835)
+
+
+Started POST "//users" for ::1 at 2023-08-17 16:53:01 +0530
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"heena", "user_name"=>"@heena", "email"=>"heena@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"heena", "email"=>"heena@gmail.com"}}
+[31mUnpermitted parameters: :user_name, :user[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "heena@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "heena"], ["email", "heena@gmail.com"], ["password_digest", "$2a$12$oJq1QTN0f2Sgm34inaDpMek5cbIrwINZ8S2zbokLNIDVl3GCXTvxm"], ["created_at", "2023-08-17 11:23:02.074215"], ["updated_at", "2023-08-17 11:23:02.074215"]]
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[35m (7.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:19:in `create'
+Completed 201 Created in 256ms (Views: 0.6ms | ActiveRecord: 8.9ms | Allocations: 4471)
+
+
+Started POST "/auth/login" for ::1 at 2023-08-17 16:53:23 +0530
+Processing by AuthenticationController#login as */*
+  Parameters: {"email"=>"heena@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"heena@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "heena@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:7:in `login'
+Completed 200 OK in 3722ms (Views: 0.2ms | ActiveRecord: 0.8ms | Allocations: 54539)
+
+
+Started GET "/users" for ::1 at 2023-08-17 16:53:47 +0530
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8:in `index'
+Completed 200 OK in 7ms (Views: 3.1ms | ActiveRecord: 0.9ms | Allocations: 1747)
+
+
+Started GET "/users/3" for ::1 at 2023-08-17 16:54:05 +0530
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:44:in `find_user'
+Completed 200 OK in 4ms (Views: 0.4ms | ActiveRecord: 0.6ms | Allocations: 1736)
+
+
+Started DELETE "/users/3" for ::1 at 2023-08-17 16:54:25 +0530
+Processing by UsersController#destroy as */*
+  Parameters: {"id"=>"3"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:44:in `find_user'
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:37:in `destroy'
+  [1m[36mUser Destroy (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 3]]
+  ↳ app/controllers/users_controller.rb:37:in `destroy'
+  [1m[35m (7.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:37:in `destroy'
+Completed 200 OK in 15ms (Views: 0.2ms | ActiveRecord: 8.8ms | Allocations: 3544)
+
+
+Started POST "//users" for ::1 at 2023-08-17 17:07:58 +0530
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"heenaa", "username"=>"@heena1", "email"=>"heena1@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"heenaa", "username"=>"@heena1", "email"=>"heena1@gmail.com"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "heena1@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  ↳ app/controllers/users_controller.rb:19:in `create'
+Completed 422 Unprocessable Entity in 255ms (Views: 0.2ms | ActiveRecord: 1.7ms | Allocations: 4977)
+
+
+Started POST "//users" for ::1 at 2023-08-17 17:08:17 +0530
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"heenaa", "username"=>"@heena1", "email"=>"heena1@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"heenaa", "username"=>"@heena1", "email"=>"heena1@gmail.com"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "heena1@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "username", "email", "password_digest", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["name", "heenaa"], ["username", "@heena1"], ["email", "heena1@gmail.com"], ["password_digest", "$2a$12$6BJV7Z6OmqdD4ZmJVHtALuEccjVchLxpILDK.ST1fdo2Q.wEP/MrW"], ["created_at", "2023-08-17 11:38:17.891620"], ["updated_at", "2023-08-17 11:38:17.891620"]]
+  ↳ app/controllers/users_controller.rb:19:in `create'
+  [1m[35m (7.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/users_controller.rb:19:in `create'
+Completed 201 Created in 262ms (Views: 0.8ms | ActiveRecord: 8.8ms | Allocations: 4095)
+
+
+Started POST "/auth/login" for ::1 at 2023-08-17 17:08:42 +0530
+Processing by AuthenticationController#login as */*
+  Parameters: {"email"=>"heena1@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"heena1@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "heena1@gmail.com"], ["LIMIT", 1]]
+  ↳ (byebug):1:in `login'
+  [1m[36mCACHE User Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "heena1@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/authentication_controller.rb:7:in `login'
+Completed 200 OK in 47955ms (Views: 0.2ms | ActiveRecord: 2.9ms | Allocations: 64407)
+
+
+Started GET "/users" for ::1 at 2023-08-17 17:10:02 +0530
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8:in `index'
+Completed 200 OK in 5ms (Views: 1.8ms | ActiveRecord: 0.7ms | Allocations: 1758)
+
+
+Started GET "/users/4" for ::1 at 2023-08-17 17:10:24 +0530
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:44:in `find_user'
+Filter chain halted as :find_user rendered or redirected
+Completed 404 Not Found in 4ms (Views: 0.2ms | ActiveRecord: 0.5ms | Allocations: 1628)
+
+
+Started GET "/users/4" for ::1 at 2023-08-17 17:10:53 +0530
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:44:in `find_user'
+Filter chain halted as :find_user rendered or redirected
+Completed 404 Not Found in 7ms (Views: 0.2ms | ActiveRecord: 1.8ms | Allocations: 1627)
+
+
+Started DELETE "/users/4" for ::1 at 2023-08-17 17:11:01 +0530
+Processing by UsersController#destroy as */*
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+Filter chain halted as :authorize_request rendered or redirected
+Completed 401 Unauthorized in 2ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 820)
+
+
+Started DELETE "/users/4" for ::1 at 2023-08-17 17:11:10 +0530
+Processing by UsersController#destroy as */*
+  Parameters: {"id"=>"4"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" IS NULL LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:44:in `find_user'
+Filter chain halted as :find_user rendered or redirected
+Completed 404 Not Found in 3ms (Views: 0.2ms | ActiveRecord: 0.6ms | Allocations: 1625)
+
+
+Started GET "/users" for ::1 at 2023-08-17 17:11:33 +0530
+Processing by UsersController#index as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:12:in `authorize_request'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/controllers/users_controller.rb:8:in `index'
+Completed 200 OK in 4ms (Views: 2.0ms | ActiveRecord: 0.8ms | Allocations: 1757)
+
+
